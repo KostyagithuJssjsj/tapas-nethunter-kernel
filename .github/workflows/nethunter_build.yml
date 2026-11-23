@@ -1074,6 +1074,10 @@ jobs:
           CONFIG_UDF_FS=y
           CONFIG_OVERLAY_FS=y
           NHEOF
+          if [ -f drivers/kernelsu/feature/selinux_hide.c ]; then
+            sed -i 's/^void security_compute_av_user_with_policy(/static void security_compute_av_user_with_policy(/' drivers/kernelsu/feature/selinux_hide.c
+            echo "✅ Fixed static declaration in selinux_hide.c"
+          fi
           echo "✅ Kali NetHunter options appended!"
 
       - name: "🔨 Build kernel with clang-r614150"
